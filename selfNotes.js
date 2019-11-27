@@ -6,3 +6,15 @@ Workflow:
 2) Go through JWT tutorial posted
 
 */
+
+/*
+Master branch 
+- this saves all the json objects in a file
+
+Prot-easy
+- authorization using JWT and PUT route
+- JWT.io website to generate token
+    - use this token as a bearer token
+    - set environment variable
+
+*/
