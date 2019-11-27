@@ -17,4 +17,9 @@ Prot-easy
     - use this token as a bearer token
     - set environment variable
 
+
 */
+
+/*
+Before I start hashing the password, i want to set up a correct user model system
+ */
