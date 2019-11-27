@@ -22,4 +22,7 @@ Prot-easy
 
 /*
 Before I start hashing the password, i want to set up a correct user model system
+
+
+add validator for emails, and check for acess
  */
