@@ -2,6 +2,8 @@
 // Basic Declaration to be used throuhout the file
 //
 //=====================================================
+var verificationC = "abc";
+//var host;
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -9,7 +11,7 @@ const bcrypt = require('bcrypt');
 const nodeMailer = require('nodeMailer')
 var validator = require('validator');
 var mongoose = require('mongoose');
-//var nev = require('email-verification')(mongoose);
+var nev = require('email-verification')(mongoose);
 // note, to end up hashing the pw, we need a salt + hash system
 mongoose.connect('mongodb+srv://dbuser:dbpass@lab3-9l1zz.mongodb.net/test?retryWrites=true&w=majority')
 
@@ -20,8 +22,12 @@ var User = require('./app/models/users') // we are calling the user model from t
 //====================================================
 // set up the email we will be sending from 
 var sender = nodeMailer.createTransport({
-    service: "Gmail"
-})
+    service: "Gmail",
+    auth: {
+        username: "thetestingman9@gmail.com",
+        password: 'thetestingman123'
+    }
+});
 
 // ===========================================================
 app.use(bodyParser.urlencoded({extended: true},
@@ -43,6 +49,7 @@ var router = express.Router(); // instance of express.router
 router.use(function(req, res, next) {
     // do logging
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     //console.log('something is happening.');
@@ -94,7 +101,7 @@ router.route('/newuser')
             res.status(500).send();
         }
         
-        var verificationC = "abc"
+        
         // must create user, hash password and save it
         // in the body i will be passing a username and password to the variable
         // DEFINE THE NEW USER
@@ -104,15 +111,62 @@ router.route('/newuser')
         user.verificationC = verificationC;
         user.verified = false;
         user.disabled = true;
-        
-        user.save(function (err) {
-            if (err) {
-                res.send(err)
+        User.findOne({name: name}, function (err, users) {  // looks for all users in users
+            console.log(users)
+            console.log(name);
+            if(err){
+                return res.send({mesage: "NO GO"})
             }
-            res.json(user.pass);
-        })
+            if (users === null){
+                
+                user.save(function (err) {
+                    if (err) {
+                        res.send(err)
+                    }
+                    res.json(user.pass);
+                })
+
+                return res.send({message: "not an old user, so lets get signed up"})
+            }
+            //sendConfirm(name); //  having a problem with this function
+            
+       /* User.find({name: name}, function(err, users){
+            console.log(users.name);
+            if(err){
+                console.log(err)
+            }
+            if (users == null){
+                
+                user.save(function (err) {
+                    if (err) {
+                        res.send(err)
+                    }
+                    res.json(user.pass);
+                })
+            }
+            else {
+                return res.send({message: "This user already exists"})
+            }
+        })*/
+        
 // WILL DO VERIFICATION FOR THE USER AFTER
     });
+});
+
+
+//THIS FUNCTION WORKS, BUT HAVING AN ISSUE WITH WITH PASSING THE
+/*function sendConfirm(host, clientName){
+    var host = '/localhost:8080';
+    var verificationL = "https://"+host+"/verify"+verificationC;
+    console.log(verificationL);
+    var template = {
+        to: clientName,
+        subject: "Verify Email Please",
+        html: verificationL
+    }
+    sender.sendMail(template);
+    return true;
+}*/
 
 // Route to see if user already exists
 router.route('/login')
