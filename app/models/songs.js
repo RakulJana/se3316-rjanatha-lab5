@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 
 var ReviewSchema = new Schema({
     rating: Number,
-    reviewDes: String,
-    reviewName: String
+    reviewdes: String,
+    reviewname: String
 });
 var SongSchema = new Schema({
     songname: String,
@@ -14,3 +14,4 @@ var SongSchema = new Schema({
 });
 // export the user schema
 module.exports = mongoose.model('Song', SongSchema);
+//module.exports = mongoose.model('Review', ReviewSchema);

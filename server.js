@@ -19,6 +19,7 @@ mongoose.connect('mongodb+srv://dbuser:dbpass@lab3-9l1zz.mongodb.net/test?retryW
 // MODELS that will be used
 var User = require('./app/models/users') // we are calling the user model from the other file
 var Song = require('./app/models/songs') // we are calling the user model from the other file
+//var Review = require('./app/models/songs') // we are calling the user model from the other file
 //====================================================
 // set up the email we will be sending from 
 var sender = nodeMailer.createTransport({
@@ -67,8 +68,8 @@ router.use(function(req, res, next) {
 
 // ROUTES FOR UNAUTHENTICATED USERS
 router.route('/open/songs')
-.get(function (req, res) { // gets all registered users
-    //res.json(users); // response is the json object of all users
+.get(function (req, res) { // gets all registered songs
+    
     Song.find(function (err, songs) {  // looks for all songs in song, gets it
         if (err){
             res.send(err);
@@ -78,11 +79,26 @@ router.route('/open/songs')
 
 });
 
+// this route is to find a specific song by song id, so if a user would want more information for a specific song
+router.route('/open/songs/:song_id')
+    // get a specific song with an associated ID
+    .get(function (req, res) {
+        Song.findById(req.params.song_id, function (err, song) {
+            if (err)
+                res.send(err);
+
+            res.json(song)
+        })
+    });
+
+
+
 //ROUTES FOR AUTHENTICATED USERS
+
+// this route will be used to add a song, so far just song name and type of artist
 router.route('/auth/addsongs')
     .post(function (req,res) {
-        //var songName = req.body.songName;
-        //var songArtist = req.body.songArtist;
+
         /*var rating = req.body.reviews.rating;
         var reviewDes = req.body.reviews.reviewDes;
         var reviewName = req.body.reviews.reviewName;
@@ -99,8 +115,43 @@ router.route('/auth/addsongs')
             res.json(song.songname);
         })
        //return res.send(songname);
-    })
+    });
 
+// this route will be to add a review, rating for a specific song, given an id
+router.route('/auth/songs/addreview/:song_id')
+    //ADDING A REVIEW OR RATING FOR A SONG
+    .put(function (req, res) {
+        // use the other item model to find the item we want
+        Song.findById(req.params.song_id, function (err, song) {
+            if (err)
+                res.send(err);
+            var localReview = { rating: req.body.rating, reviewDes: req.body.reviewDes, reviewname: req.body.reviewname }; // this stores a local object of the review added
+            song.reviews.push(localReview);
+            // save the song
+            song.save(function (err) {
+                if (err)
+                    res.send(err)
+                res.json({ message: 'Song Updated' });
+            });
+        });
+    });
+
+
+
+
+// this route should be used for the authenticated user to delete a particular song 
+router.route('/auth/songs/:song_id')
+
+    //delete a specific song based on an id
+    .delete(function (req, res) {
+        song.remove({
+            _id: req.params.song_id
+        }, function (err, song) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Success in deleting' });
+        });
+    });
 
 
 // ROUTE TO GET USERS
