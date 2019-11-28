@@ -91,7 +91,21 @@ router.route('/open/songs/:song_id') // works well
         })
     });
 
-
+    // this route will be used for the primary query of song titles into our database, we will might be calling an external function as well
+router.route('/open/songs/search/:stitle')
+    .get(function(req, res){
+        //var title = req.params.stitle;
+        clean = new RegExp(req.params.stitle, 'gi'); // this is a function i found online, that is used for search queries, i will reference if need be 
+        Song.find({stitle: clean}, function (err, search){
+            if (err){
+                res.send(err);
+            }
+            if(search === null){
+                return res.send({messgae:"the search did not find anything"})
+            }
+            return res.json(search);
+        })
+    })
 
 //ROUTES FOR AUTHENTICATED USERS
 
