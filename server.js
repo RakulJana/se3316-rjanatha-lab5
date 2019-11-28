@@ -6,8 +6,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-//const nodeMailer = require('nodeMailer')
-//var validator = require('validator');
+const nodeMailer = require('nodeMailer')
+var validator = require('validator');
 var mongoose = require('mongoose');
 //var nev = require('email-verification')(mongoose);
 // note, to end up hashing the pw, we need a salt + hash system
@@ -18,7 +18,12 @@ mongoose.connect('mongodb+srv://dbuser:dbpass@lab3-9l1zz.mongodb.net/test?retryW
 var User = require('./app/models/users') // we are calling the user model from the other file
 
 //====================================================
+// set up the email we will be sending from 
+var sender = nodeMailer.createTransport({
+    service: "Gmail"
+})
 
+// ===========================================================
 app.use(bodyParser.urlencoded({extended: true},
     { useUnifiedTopology: true }
     ));
@@ -72,10 +77,11 @@ router.route('/newuser')
         // initialize variables to be used from the post req
         var name = req.body.name;
         var pass = req.body.pass;
+        //var verified = req.body.verified;
         
         // basic checks to see if empty value
         if (name === ""){ return res.send({message: 'Empty email field'})};
-        //if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
+        if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
         if (pass === ""){ return res.send({message: 'Empty password field'})};
         
         // this sets up our hash password
@@ -88,14 +94,16 @@ router.route('/newuser')
             res.status(500).send();
         }
         
-        var verification = "abc"
+        var verificationC = "abc"
         // must create user, hash password and save it
         // in the body i will be passing a username and password to the variable
         // DEFINE THE NEW USER
         user = new User();
         user.name = req.body.name; // this will use the req body name for the post requiest and use the user model to add it in the collection we made
         user.pass = hashPass; // we want to end up hashing the passswords, so no one will know
-        user.verification = verification;
+        user.verificationC = verificationC;
+        user.verified = false;
+        user.disabled = true;
         
         user.save(function (err) {
             if (err) {
@@ -115,7 +123,7 @@ router.route('/login')
     var pass = req.body.pass;
     //console.log(passw);
     if (name === ""){ return res.send({message: 'Empty email field'})};
-    //if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
+    if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
     if (pass === ""){ return res.send({message: 'Empty password field'})};
     
     User.findOne({name: name}, function (err, users) {  // looks for all users in users
@@ -125,15 +133,16 @@ router.route('/login')
         if (users === null){
             return res.send({message: "Does not exist"})
         }
-        else {
-            return res.send({message: "Success"})
-        }
+        
         //res.json(users);
         //console.log(users)
         // checks to see if the password made was correct
         var check = bcrypt.compareSync(pass, users.pass)
         if (check){
-            console.log('true')
+            console.log('true');
+            var verified = users.verified;
+            var disabled = users.disabled;
+            var admin = users.admin;
             res.status(400).send();
         }
         else{
@@ -142,7 +151,15 @@ router.route('/login')
         // =====================================================
         // in this portion i must do the checks to accordingly route them
         //=====================================================
-        
+        if (!verified){
+            return res.send({message:"you are good", id: users._id})
+        }
+            else if(!verified)
+                return res.send({message:"you are  good", id: users._id})
+        if(disabled){
+            return res.send({mesage:"disabled", id: users._id})
+        }
+
     });
 
 });

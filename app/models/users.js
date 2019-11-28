@@ -4,7 +4,11 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     name: String,
     pass: String,
-    verification: String
+    verificationC: String,
+    verified: Boolean,
+    disabled: Boolean,
+    admin: Boolean
+
 });
 // export the user schema
 module.exports = mongoose.model('User', UserSchema);
