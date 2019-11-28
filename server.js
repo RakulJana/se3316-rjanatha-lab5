@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://dbuser:dbpass@lab3-9l1zz.mongodb.net/test?retryW
 // ==================================
 // MODELS that will be used
 var User = require('./app/models/users') // we are calling the user model from the other file
-
+var Song = require('./app/models/songs') // we are calling the user model from the other file
 //====================================================
 // set up the email we will be sending from 
 var sender = nodeMailer.createTransport({
@@ -65,6 +65,44 @@ router.use(function(req, res, next) {
 //
 //==================================================================================================================
 
+// ROUTES FOR UNAUTHENTICATED USERS
+router.route('/open/songs')
+.get(function (req, res) { // gets all registered users
+    //res.json(users); // response is the json object of all users
+    Song.find(function (err, songs) {  // looks for all songs in song, gets it
+        if (err){
+            res.send(err);
+        }
+        res.send(songs);
+    });
+
+});
+
+//ROUTES FOR AUTHENTICATED USERS
+router.route('/auth/addsongs')
+    .post(function (req,res) {
+        //var songName = req.body.songName;
+        //var songArtist = req.body.songArtist;
+        /*var rating = req.body.reviews.rating;
+        var reviewDes = req.body.reviews.reviewDes;
+        var reviewName = req.body.reviews.reviewName;
+        WE WOULDNT ADD THIS HERE BECAUSE THEY ARE JUST ADDING A SONG
+        HOWEVER, IN UPDATE WE WOULD BE ABLE TO ADD A REVIEW
+        */
+        song = new Song();
+        song.songname = req.body.songname;
+        song.songartist = req.body.songartist;
+        song.save(function (err) {
+            if (err) {
+                res.send(err)
+            }
+            res.json(song.songname);
+        })
+       //return res.send(songname);
+    })
+
+
+
 // ROUTE TO GET USERS
 router.route('/users') 
 
@@ -84,6 +122,7 @@ router.route('/newuser')
         // initialize variables to be used from the post req
         var name = req.body.name;
         var pass = req.body.pass;
+        
         //var verified = req.body.verified;
         
         // basic checks to see if empty value
