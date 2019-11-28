@@ -7,8 +7,12 @@ var ReviewSchema = new Schema({
     reviewname: String
 });
 var SongSchema = new Schema({
-    songname: String,
-    songartist: String,
+    stitle: String,
+    sartist: String,
+    salbum: String,
+    syear: Number,
+    strack: String,
+    sgenre: String,
     reviews: [ReviewSchema]
 
 });

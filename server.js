@@ -67,7 +67,7 @@ router.use(function(req, res, next) {
 //==================================================================================================================
 
 // ROUTES FOR UNAUTHENTICATED USERS
-router.route('/open/songs')
+router.route('/open/songs') // works well
 .get(function (req, res) { // gets all registered songs
     
     Song.find(function (err, songs) {  // looks for all songs in song, gets it
@@ -80,7 +80,7 @@ router.route('/open/songs')
 });
 
 // this route is to find a specific song by song id, so if a user would want more information for a specific song
-router.route('/open/songs/:song_id')
+router.route('/open/songs/:song_id') // works well
     // get a specific song with an associated ID
     .get(function (req, res) {
         Song.findById(req.params.song_id, function (err, song) {
@@ -96,8 +96,8 @@ router.route('/open/songs/:song_id')
 //ROUTES FOR AUTHENTICATED USERS
 
 // this route will be used to add a song, so far just song name and type of artist
-router.route('/auth/addsongs')
-    .post(function (req,res) {
+router.route('/auth/addsong')
+    .post(function (req,res) { // this route works well after testing
 
         /*var rating = req.body.reviews.rating;
         var reviewDes = req.body.reviews.reviewDes;
@@ -106,8 +106,40 @@ router.route('/auth/addsongs')
         HOWEVER, IN UPDATE WE WOULD BE ABLE TO ADD A REVIEW
         */
         song = new Song();
-        song.songname = req.body.songname;
-        song.songartist = req.body.songartist;
+        song.stitle = req.body.stitle;
+        song.sartist = req.body.sartist;
+
+        if (song.sartist === ""){ return res.send({message: 'Empty artist field'})};
+        if (song.stitle === ""){ return res.send({message: 'Empty title field'})};
+        song.salbum = req.body.salbum;
+        song.syear = req.body.syear;
+        song.strack = req.body.strack;
+        song.sgenre = req.body.sgenre;
+        song.save(function (err) {
+            if (err) {
+                res.send(err)
+            }
+            res.json(song.songname);
+        })
+       //return res.send(songname);
+    });
+    router.route('/auth/addboth') // works well after testing
+    .post(function (req,res) {
+
+        
+        song = new Song();
+        song.stitle = req.body.stitle;
+        song.sartist = req.body.sartist;
+
+        if (song.sartist === ""){ return res.send({message: 'Empty artist field'})};
+        if (song.title === ""){ return res.send({message: 'Empty title field'})};
+        song.salbum = req.body.salbum;
+        song.syear = req.body.syear;
+        song.strack = req.body.sgenre;
+        song.sgenre = req.body.sgenre;
+        // same concept as my other routes, but i combined the two due to a specific requirement
+        var localReview = { rating: req.body.rating, reviewdes: req.body.reviewdes, reviewname: req.body.reviewname }; // this stores a local object of the review added
+        song.reviews.push(localReview);
         song.save(function (err) {
             if (err) {
                 res.send(err)
@@ -117,15 +149,33 @@ router.route('/auth/addsongs')
        //return res.send(songname);
     });
 
-// this route will be to add a review, rating for a specific song, given an id
-router.route('/auth/songs/addreview/:song_id')
-    //ADDING A REVIEW OR RATING FOR A SONG
+// this route will be to add a review, given an id
+router.route('/auth/songs/addreview/:song_id') // works well after testing
+    //ADDING A REVIEW FOR A SONG
     .put(function (req, res) {
         // use the other item model to find the item we want
         Song.findById(req.params.song_id, function (err, song) {
             if (err)
                 res.send(err);
-            var localReview = { rating: req.body.rating, reviewDes: req.body.reviewDes, reviewname: req.body.reviewname }; // this stores a local object of the review added
+            var localReview = { reviewdes: req.body.reviewdes, reviewname: req.body.reviewname }; // this stores a local object of the review added
+            song.reviews.push(localReview);
+            // save the song
+            song.save(function (err) {
+                if (err)
+                    res.send(err)
+                res.json({ message: 'Song Updated' });
+            });
+        });
+    });
+
+router.route('/auth/songs/addrating/:song_id')
+    //ADDING A RATING FOR A SONG
+    .put(function (req, res) {
+        // use the other item model to find the item we want
+        Song.findById(req.params.song_id, function (err, song) {
+            if (err)
+                res.send(err);
+            var localReview = { rating: req.body.rating, reviewname: req.body.reviewname }; // this stores a local object of the review added
             song.reviews.push(localReview);
             // save the song
             song.save(function (err) {
@@ -139,12 +189,13 @@ router.route('/auth/songs/addreview/:song_id')
 
 
 
+
 // this route should be used for the authenticated user to delete a particular song 
-router.route('/auth/songs/:song_id')
+router.route('/auth/songs/:song_id') // works great
 
     //delete a specific song based on an id
     .delete(function (req, res) {
-        song.remove({
+        Song.remove({
             _id: req.params.song_id
         }, function (err, song) {
             if (err)
