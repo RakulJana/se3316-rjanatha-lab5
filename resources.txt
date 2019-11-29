@@ -1,0 +1,7 @@
+thetestman9@gmail.com
+
+thetestman123
+
+https://stackoverflow.com/questions/33049707/push-items-into-mongo-array-via-mongoose
+http://w3schools.sinsixx.com/jsref/jsref_regexp_modifier_gi.asp.htm?fbclid=IwAR1S54aVq7VRxQwP69GuwWDQmsHIoDwveuMde_3sJBK9AET7KW9ftWMPfO0
+https://www.npmjs.com/package/email-verification
