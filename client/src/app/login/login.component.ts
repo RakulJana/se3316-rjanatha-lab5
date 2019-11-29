@@ -11,5 +11,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+  logIn(checkoutForm){
+    console.log(checkoutForm);
+  }
 
 }
