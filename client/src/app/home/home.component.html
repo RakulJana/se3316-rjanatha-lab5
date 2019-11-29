@@ -1,1 +1,10 @@
-<p>home works!</p>
+<h1>All items</h1>
+
+<ul *ngIf = "song">
+    <li *ngFor = "let song of song">
+        <p class="name">{{song.stitle}}</p>
+        <p class="type">{{item.sartist}}</p>
+        <p class="loan">{{item.salbum}}</p>
+        
+    </li>
+</ul>
