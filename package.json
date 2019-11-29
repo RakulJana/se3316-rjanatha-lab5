@@ -4,8 +4,10 @@
   "main": "server.js",
   "dependencies": {
     "bcrypt": "^3.0.7",
+    "cors": "^2.8.5",
     "email-verification": "^0.4.6",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.12",
     "nodemailer": "^6.3.1",
     "validator": "^12.1.0"

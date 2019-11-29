@@ -233,7 +233,7 @@ router.route('/users')
 
     });
 // ROUTE WILL BE USED TO CREATE A NEW USER
-router.route('/newuser')
+router.route('/register')
     .post(async function (req, res) {
         // initialize variables to be used from the post req
         var name = req.body.name;
