@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,8 +13,9 @@ export class HomeComponent implements OnInit {
   search: Object;
   songs: Object;
   songID: Object;
-  ratingTotal: Number=0;
-  ratingSum: Number = 0;
+  ratingTotal: number=0;
+  ratingSum: number = 0;
+  averageRating: number = 0;
   reviews: [];
   display: Boolean = false;
 
@@ -37,14 +39,22 @@ export class HomeComponent implements OnInit {
     console.log(_id);
     this._http.getSongsID(_id).subscribe(data => {
       this.songID = data
-      
-      console.log(this.songID["reviews"].length)
-      console.log(this.songID["reviews"][0].rating)
-      console.log(this.songID["reviews"][1].rating)
-      console.log(this.songID["reviews"][2].rating)
+      var ratingLocal = this.songID["reviews"];
+ 
+      for(var i = 0; i < ratingLocal.length; i++){
+        if(ratingLocal[i].rating == null || ratingLocal[i].rating ==="undefined" || ratingLocal[i].rating == NaN)
+        {
+          console.log("not added")
+        } else {
+          // this will add the sum and create a counter to divide by to get the avergae rating for a song
+          this.ratingSum = ratingLocal[i].rating + this.ratingSum;
+          //console.log(this.ratingSum)
+          this.ratingTotal++;
+          //console.log(this.ratingTotal);
+        }
+        this.averageRating = this.ratingSum / this.ratingTotal;
+      }
       console.log(this.songID);
-
-    
       // number of reviews is the size of the array
       // average rating is the average sum of rating / total size
     }
