@@ -7,7 +7,8 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent}, // '' because it is the default route that should be loaded
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({

@@ -21,18 +21,29 @@
 
 <h1>Detailed Song Info:</h1>
 <ul *ngIf="songID">
-<li>
-    <p class="title">{{ songID.stitle }}<br></p>
-    <p class="info">{{ songID.sartist }}</p><br>
-    <p class="details">{{ songID.salbum }}</p><br>
-    <p class="details">{{ songID.syear }}</p><br>
-    <p class="details">{{ songID.strack }}</p><br>
-    <p class="details">{{ songID.sgenre }}</p><br>
+<li id="moreList">
+    <p>Total Reviews: {{songID['reviews'].length}}</p>
+    <p>Most Recent Review Name: {{songID['reviews'][songID['reviews'].length-1].reviewname}}</p>
+    <p>Most Recent Review Rating: {{songID['reviews'][songID['reviews'].length-1].rating}}</p>
+    <p>Most Recent Review Description: {{songID['reviews'][songID['reviews'].length-1].reviewdes}}</p>
+    <p>Average Ratings: </p>
+    <p>{{ songID.stitle }}</p>
+    <p>{{ songID.sartist }}</p>
+    <p>{{ songID.salbum }}</p>
+    <p>{{ songID.syear }}</p>
+    <p>{{ songID.strack }}</p>
+    <p>{{ songID.sgenre }}</p>
 </li>
+
+    <ul *ngIf = "display">
     <li *ngFor="let num of songID['reviews']">
+        
         <p>Rating: {{num.rating}}</p><br>
         <p>Review Description: {{num.reviewdes}}</p><br>
         <p>Reviewer Name: {{num.reviewname}}</p><br>
     </li>
-    <!--<p class="details">{{ songID["reviews"][0].rating}}</p><br>-->
 </ul>
+<button (click)="displayReview()">Display All Reviews</button>
+
+</ul>
+ 

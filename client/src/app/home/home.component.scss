@@ -14,6 +14,8 @@ ul {
         margin-bottom: 1em;
         display: flex;
         flex-direction: column;
+        
+        
 
         p {
             margin: 0;
@@ -37,4 +39,9 @@ ul {
             display: none;
         }
     }
+}
+
+#moreList{
+    background: none;
+    display: inline-block;
 }
