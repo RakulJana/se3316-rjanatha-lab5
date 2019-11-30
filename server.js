@@ -256,7 +256,14 @@ router.route('/register')
             res.status(500).send();
         }
         
-        
+        User.findOne({name: name}, function (err, users){
+            if(err){
+                res.send(err)
+            }
+            if(users!== null){
+                return res.send({message:"already exists"})
+            }
+        })
         // must create user, hash password and save it
         // in the body i will be passing a username and password to the variable
         // DEFINE THE NEW USER
