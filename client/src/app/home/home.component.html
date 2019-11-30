@@ -46,4 +46,10 @@
 <button (click)="displayReview()">Display All Reviews</button>
 
 </ul>
+
+<div *ngIf = "value">
+    <h1>You Are Logged In User. Welcome to the Admin Life!!!</h1>
+    <p>If you want to go to your admin priviledges, please click the following button</p>
+    <button (click) = reroute()>admin</button>
+</div>
  

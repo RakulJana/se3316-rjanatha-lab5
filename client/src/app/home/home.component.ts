@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { Router} from '@angular/router'
 
 @Component({
   selector: 'app-home',
@@ -18,15 +19,24 @@ export class HomeComponent implements OnInit {
   averageRating: number = 0;
   reviews: [];
   display: Boolean = false;
+  value: Boolean = false;
 
-  constructor(private _http: HttpService) { }
+  constructor(private _http: HttpService, private route: Router) { }
 
   ngOnInit() {
+    if(localStorage.username == null){
+      this.value = false;
+    }else{
+      this.value = true;
+    }
+    
     
     this._http.getSongs().subscribe(data => {
       this.songs = data
       console.log(this.songs);
     }
+    
+
   );
   }
   // this function is used by a button to display all available reviews
@@ -68,6 +78,20 @@ searchRes(name: String){
     console.log(this.search)
   }
 );
+}
+
+loggedIn(){
+  if(localStorage.username == null){
+    console.log("not auth")
+  }else {
+    console.log(this.value)
+    return this.value = true;
+    
+  }
+}
+
+reroute(){
+  this.route.navigateByUrl("admin")
 }
 
 

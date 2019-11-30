@@ -11,10 +11,7 @@ export class RegisterComponent implements OnInit {
   constructor(private route: Router) { }
 
   ngOnInit() {
-    if(localStorage.username == null){
-      alert("no access")
-      this.route.navigateByUrl("login")
-    }
+    
   }
 
   //register()
