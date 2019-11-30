@@ -7,9 +7,15 @@ import { HttpClient } from '@angular/common/http';
 export class HttpService {
 
    
-  constructor(private http: HttpClient, public url: 'https://localhost:8080/') { }
+  constructor(private http: HttpClient) { }
   
-  getSongs(){
-    return this.http.get('https://localhost:8080/open/songs')
+  getSongs() {
+    return this.http.get('http://localhost:8080/open/songs')
+  }
+  getSongsID(id) {
+    return this.http.get('http://localhost:8080/open/songs/'+id)
+  }
+  logIn(userData){
+    return this.http.post('https://localhost:8080/login', userData)
   }
 }

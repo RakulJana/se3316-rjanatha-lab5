@@ -1,15 +1,10 @@
 <div>
     
-        <p>Login:</p>
-        <input type="text" [(ngModel)]="username">
-        <br>
+        <p>Username:<br>
+        <input type = "text" [(ngModel)] = "username"></p>
+        <p>password:<br>
+        <input type = "text" [(ngModel)] = "password"></p>
+        <button (click)= submit()>submit</button>
 
-        <p>password</p>
-        <input type="text" [(ngModel)]="password">
-        <br>
-
-        
-        <button type="submit" value="post" (click)=log()>Submit</button>
     
-
 </div>

@@ -1,10 +1,45 @@
-<h1>All items</h1>
-
-<ul *ngIf = "song">
-    <li *ngFor = "let song of song">
-        <p class="name">{{song.stitle}}</p>
-        <p class="type">{{item.sartist}}</p>
-        <p class="loan">{{item.salbum}}</p>
-        
+<h1>Home</h1>
+<h2>This app is used to get the song information in our databse. If you wish to register or log in please click the buttons on the header. Enjoy</h2>
+<!-- <ul *ngIf="songs">
+    <li *ngFor="let song of songs">
+        <ng-template [ngIf]="display" [ngIfElse]="none">
+            
+            <p class="title">{{ song.stitle }}</p>
+            <p class="info">{{ song.sartist }}</p>
+            <p class="details">{{ song.salbum }}</p>
+            <p class="details">{{ song.syear }}</p>
+            <p class="details">{{ song.strack }}</p>
+            <p class="details">{{ song.sgenre }}</p>
+        </ng-template>
+            <ng-template #none>
+                <p class="title">{{ song.stitle }}</p>
+                <p>Click on <span (click) = "more()">info</span> for more info.</p>
+            </ng-template>
+            
     </li>
+</ul>-->
+<h1>Song Info</h1>
+<ul *ngIf="songs">
+    <li *ngFor="let song of songs">
+        <p class="title">{{ song.stitle }}</p>
+        <button (click)="more(song._id)">More Info</button>
+    </li>
+</ul>
+
+<h1>Detailed Song Info:</h1>
+<ul *ngIf="songID">
+<p>
+    <p class="title">{{ songID.stitle }}<br></p>
+    <p class="info">{{ songID.sartist }}</p><br>
+    <p class="details">{{ songID.salbum }}</p><br>
+    <p class="details">{{ songID.syear }}</p><br>
+    <p class="details">{{ songID.strack }}</p><br>
+    <p class="details">{{ songID.sgenre }}</p><br>
+</p>
+    <li *ngFor="let num of songID['reviews']">
+        <p>Rating: {{num.rating}}</p><br>
+        <p>Review Description: {{num.reviewdes}}</p><br>
+        <p>Reviewer Name: {{num.reviewname}}</p><br>
+    </li>
+    <!--<p class="details">{{ songID["reviews"][0].rating}}</p><br>-->
 </ul>

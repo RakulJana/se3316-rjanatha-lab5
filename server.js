@@ -332,7 +332,7 @@ router.route('/login')
     var pass = req.body.pass;
     //console.log(passw);
     if (name === ""){ return res.send({message: 'Empty email field'})};
-    if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
+    //if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
     if (pass === ""){ return res.send({message: 'Empty password field'})};
     
     User.findOne({name: name}, function (err, users) {  // looks for all users in users
@@ -348,6 +348,7 @@ router.route('/login')
         // checks to see if the password made was correct
         var check = bcrypt.compareSync(pass, users.pass)
         if (check){
+            return res.send({message: "Logged In"})
             console.log('true');
             var verified = users.verified;
             var disabled = users.disabled;
@@ -360,14 +361,14 @@ router.route('/login')
         // =====================================================
         // in this portion i must do the checks to accordingly route them
         //=====================================================
-        if (!verified){
+        /*if (!verified){
             return res.send({message:"you are good", id: users._id})
         }
             else if(!verified)
                 return res.send({message:"you are  good", id: users._id})
         if(disabled){
             return res.send({mesage:"disabled", id: users._id})
-        }
+        }*/
 
     });
 
