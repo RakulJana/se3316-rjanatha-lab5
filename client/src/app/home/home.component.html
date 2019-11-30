@@ -1,23 +1,16 @@
 <h1>Home</h1>
-<h2>This app is used to get the song information in our databse. If you wish to register or log in please click the buttons on the header. Enjoy</h2>
-<!-- <ul *ngIf="songs">
-    <li *ngFor="let song of songs">
-        <ng-template [ngIf]="display" [ngIfElse]="none">
-            
-            <p class="title">{{ song.stitle }}</p>
-            <p class="info">{{ song.sartist }}</p>
-            <p class="details">{{ song.salbum }}</p>
-            <p class="details">{{ song.syear }}</p>
-            <p class="details">{{ song.strack }}</p>
-            <p class="details">{{ song.sgenre }}</p>
-        </ng-template>
-            <ng-template #none>
-                <p class="title">{{ song.stitle }}</p>
-                <p>Click on <span (click) = "more()">info</span> for more info.</p>
-            </ng-template>
-            
+<h2>This app is used to get the song information in our database. If you wish to register or log in please click the buttons on the header. Enjoy</h2>
+
+<h1>Song Info</h1>
+<input type = "text" [(ngModel)] = "name" placeholder="Enter Search">
+<button (click) = "searchRes(name)">Search</button>
+
+<ul *ngIf="search">
+    <li *ngFor="let ind of search">
+        <p class="title">{{ind.stitle}}</p>
     </li>
-</ul>-->
+</ul>
+
 <h1>Song Info</h1>
 <ul *ngIf="songs">
     <li *ngFor="let song of songs">
@@ -28,14 +21,14 @@
 
 <h1>Detailed Song Info:</h1>
 <ul *ngIf="songID">
-<p>
+<li>
     <p class="title">{{ songID.stitle }}<br></p>
     <p class="info">{{ songID.sartist }}</p><br>
     <p class="details">{{ songID.salbum }}</p><br>
     <p class="details">{{ songID.syear }}</p><br>
     <p class="details">{{ songID.strack }}</p><br>
     <p class="details">{{ songID.sgenre }}</p><br>
-</p>
+</li>
     <li *ngFor="let num of songID['reviews']">
         <p>Rating: {{num.rating}}</p><br>
         <p>Review Description: {{num.reviewdes}}</p><br>

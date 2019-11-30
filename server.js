@@ -98,12 +98,12 @@ router.route('/open/songs/search/:stitle')
         clean = new RegExp(req.params.stitle, 'gi'); // this is a function i found online, that is used for search queries, i will reference if need be 
         Song.find({stitle: clean}, function (err, search){
             if (err){
-                res.send(err);
+                return res.send(err);
             }
             if(search === null){
                 return res.send({messgae:"the search did not find anything"})
             }
-            return res.json(search);
+           return res.json(search);
         })
     })
 

@@ -16,6 +16,10 @@ export class HttpService {
     return this.http.get('http://localhost:8080/open/songs/'+id)
   }
   logIn(userData){
-    return this.http.post('https://localhost:8080/login', userData)
+    return this.http.post('https://localhost:8080/login/', userData)
+  }
+  search(name){
+    return this.http.get('http://localhost:8080/open/songs/search/'+name)
+    
   }
 }

@@ -6,7 +6,7 @@ import { HttpService } from '../http.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  search: Object;
   songs: Object;
   songID: Object;
   reviews: [];
@@ -30,7 +30,16 @@ export class HomeComponent implements OnInit {
       console.log(this.songID);
     }
   );
+}
+
+searchRes(name: String){
+  console.log(name);
+  this._http.search(name).subscribe(data => {
+    this.search = data;
+    console.log(this.search)
   }
-  
+);
+}
+
 
 }
