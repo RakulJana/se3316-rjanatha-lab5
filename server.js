@@ -166,7 +166,7 @@ router.route('/auth/addsong')
 // this route will be to add a review, given an id
 router.route('/auth/songs/addreview/:song_id') // works well after testing
     //ADDING A REVIEW FOR A SONG
-    .put(function (req, res) {
+    .post(function (req, res) {
         // use the other item model to find the item we want
         Song.findById(req.params.song_id, function (err, song) {
             if (err)
@@ -177,14 +177,14 @@ router.route('/auth/songs/addreview/:song_id') // works well after testing
             song.save(function (err) {
                 if (err)
                     res.send(err)
-                res.json({ message: 'Song Updated' });
+                res.json({ message: 'Review Saved' });
             });
         });
     });
 
 router.route('/auth/songs/addrating/:song_id')
     //ADDING A RATING FOR A SONG
-    .put(function (req, res) {
+    .post(function (req, res) {
         // use the other item model to find the item we want
         Song.findById(req.params.song_id, function (err, song) {
             if (err)
@@ -195,7 +195,7 @@ router.route('/auth/songs/addrating/:song_id')
             song.save(function (err) {
                 if (err)
                     res.send(err)
-                res.json({ message: 'Song Updated' });
+                res.json({ message: 'Review Saved' });
             });
         });
     });

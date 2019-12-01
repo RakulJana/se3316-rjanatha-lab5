@@ -25,4 +25,12 @@ export class HttpService {
   search(name){
     return this.http.get('http://localhost:8080/open/songs/search/'+name)
   }
+
+  addRating(id: String, ratingData: Object){
+    
+    return this.http.post('http://localhost:8080/auth/songs/addrating/'+id, ratingData)
+  }
+  addReview(id: String, ratingData: Object){
+    return this.http.post('http://localhost:8080/auth/songs/addreview/'+id, ratingData)
+  }
 }

@@ -1,8 +1,31 @@
 <h1>In this section of the app, you will have access to do the following
 </h1>
 <ol>
-    <li>Add a review to a song: <button btn-primary >click here</button></li>
-    <li>Add a rating to a song: <button btn-primary >click here</button></li>
-    <li>Add a new song: <button btn-primary >click here</button></li>
-    <li>Adding a song, review and rating all at once: <button btn-primary >click here</button></li>
+    <li>Add a review to a song: </li>
+    <li>Add a rating to a song:</li>
+    <li>Add a new song: </li>
+    <li>Adding a song, review and rating all at once: </li>
+</ol>
+
+<ol *ngIf="songs">
+    <li *ngFor="let song of songs">
+        <p class="title">{{ song.stitle }}</p>
+        <button (click) = "toggle(song._id, song.stitle)">Forms</button>
+    </li>
+    <div *ngIf="display">
+        <h2>ADD RATING FORM FOR SONG: {{title}} </h2>
+            <p>Rating:<br>
+                <input type="text" [(ngModel)]="rating"></p>
+            <p>Reviewer Name:<br>
+                <input type="text" [(ngModel)]="reviewname" placeholder="enter"></p>
+            <button (click)="addRatingInfo()">Add Rating</button>
+    </div>
+    <div *ngIf="display">
+        <h2>ADD Review FORM FOR SONG: {{title}} </h2>
+        <p>Review Description:<br>
+            <input type="text" [(ngModel)]="reviewdes"></p>
+        <p>Reviewer Name:<br>
+            <input type="text" [(ngModel)]="reviewname" placeholder="enter"></p>
+        <button (click)="addReviewInfo()">Add Review</button>
+    </div>
 </ol>
