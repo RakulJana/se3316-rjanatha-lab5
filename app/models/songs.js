@@ -13,7 +13,8 @@ var SongSchema = new Schema({
     syear: Number,
     strack: String,
     sgenre: String,
-    reviews: [ReviewSchema]
+    reviews: [ReviewSchema],
+    hidden: Boolean
 
 });
 // export the user schema

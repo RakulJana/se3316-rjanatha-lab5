@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   display: Boolean = false;
   value: Boolean = false;
   sm: Boolean = false;
+  hidden: Boolean;
 
   constructor(private _http: HttpService, private route: Router) { }
 
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
     
     this._http.getSongs().subscribe(data => {
       this.songs = data
-      console.log(this.songs);
+     
     }
     
 

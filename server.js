@@ -129,6 +129,7 @@ router.route('/auth/addsong')
         song.syear = req.body.syear;
         song.strack = req.body.strack;
         song.sgenre = req.body.sgenre;
+        song.hidden = false;
         song.save(function (err) {
             if (err) {
                 res.send(err)

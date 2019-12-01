@@ -14,8 +14,10 @@
 <h1>Song Info</h1>
 <ul *ngIf="songs">
     <li *ngFor="let song of songs">
-        <p class="title">{{ song.stitle }}</p>
-        <button (click)="more(song._id)">More Info</button>
+            <div *ngIf="!hidden">
+                <p class="title">{{ song.stitle }}</p>
+                <button (click)="more(song._id)">More Info</button>
+            </div>
     </li>
 </ul>
 
