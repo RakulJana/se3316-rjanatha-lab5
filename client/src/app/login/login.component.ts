@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
     this.disp = true;
     //return this.disp;
   };
+  register(){
+    this.route.navigateByUrl("register")
+  }
 // I create an object that will be passed over to the back end
   logIn(){
     let userData = {
@@ -47,6 +50,10 @@ export class LoginComponent implements OnInit {
         this.reply = newData["message"] + " please try again";
       }
       if(newData["message"] == "Empty password field"){
+        // since not yet verified we will leave it as registered
+        this.reply = newData["message"] + " please try again";
+      }
+      if(newData["message"] == "Wrong Password"){
         // since not yet verified we will leave it as registered
         this.reply = newData["message"] + " please try again";
       }
