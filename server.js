@@ -19,6 +19,7 @@ mongoose.connect('mongodb+srv://dbuser:dbpass@lab3-9l1zz.mongodb.net/test?retryW
 // MODELS that will be used
 var User = require('./app/models/users') // we are calling the user model from the other file
 var Song = require('./app/models/songs') // we are calling the user model from the other file
+var Dmca = require('./app/models/dmcas') // we are calling the user model from the other file
 //var Review = require('./app/models/songs') // we are calling the user model from the other file
 //====================================================
 // set up the email we will be sending from 
@@ -101,7 +102,7 @@ router.route('/open/songs/search/:stitle')
                 return res.send(err);
             }
             if(search === null){
-                return res.send({messgae:"the search did not find anything"})
+                return res.send({message:"the search did not find anything"})
             }
            return res.json(search);
         })
@@ -282,7 +283,10 @@ router.route('/register')
         
         // basic checks to see if empty value
         if (name === ""){ return res.send({message: 'Empty email field'})};
-        if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
+        if(name === "site manager"){
+            console.log("u escaped the email check")
+        }
+         else if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
         if (pass === ""){ return res.send({message: 'Empty password field'})};
         
         // this sets up our hash password
@@ -351,6 +355,57 @@ router.route('/register')
 });
 
 
+// ROUTES FOR DMCA & PRIVACY POLICY //
+// ==========================================================================
+
+router.route('/DMCA')
+    .get(function (req, res) {
+        Dmca.find(function (err, dmcas) {  // looks for all songs in song, gets it
+            if (err) {
+                res.send(err);
+            }
+            res.send(dmcas);
+        });
+    })
+    .post(function (req,res) {
+        dmca = new Dmca();
+        dmca.policyOne = req.body.policyOne;
+        dmca.policyTwo = req.body.policyTwo;
+        dmca.policyThree = req.body.policyThree;
+        dmca.save(function (err) {
+            if(err){
+                res.send(err)
+            }
+            res.json({message:"success"})
+        })
+
+    })
+
+router.route('/DMCA/:dmca_id')
+.put(function (req, res) {
+
+    var policy1 = req.body.policyOne;
+    console.log(policy1)
+    var policy2 = req.body.policyTwo;
+    var policy3 = req.body.policyThree;
+    Dmca.findById(req.params.dmca_id, function (err, dmca) {
+        if (err)
+            res.send(err);
+        //var localReview = { rating: req.body.rating, reviewname: req.body.reviewname }; // this stores a local object of the review added
+        //song.reviews.push(localReview);
+        dmca.policyOne = policy1;
+        dmca.policyTwo = policy2;
+        dmca.policyThree = policy3;
+        // save the song
+        dmca.save(function (err) {
+            if (err)
+                res.send(err)
+            res.json({ message: 'Policies Saved' });
+        });
+    });
+});
+
+
 //THIS FUNCTION WORKS, BUT HAVING AN ISSUE WITH WITH PASSING THE
 function sendConfirm(clientName){
     console.log(clientName)
@@ -375,7 +430,10 @@ router.route('/login')
     var pass = req.body.pass;
     //console.log(passw);
     if (name === ""){ return res.send({message: 'Empty email field'})};
-    if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
+    if(name === "site manager"){
+        console.log("u escaped the email check")
+    }
+        else if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
     if (pass === ""){ return res.send({message: 'Empty password field'})};
     
     User.findOne({name: name}, function (err, users) {  // looks for all users in users
