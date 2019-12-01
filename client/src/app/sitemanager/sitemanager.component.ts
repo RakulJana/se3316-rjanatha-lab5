@@ -11,6 +11,8 @@ export class SitemanagerComponent implements OnInit {
   constructor(private route: Router) { }
 
   ngOnInit() {
+
+    // initialization features 
     if(localStorage.username != null && localStorage.manager != null){
       console.log("welcome")
     }
