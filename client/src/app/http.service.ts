@@ -5,32 +5,35 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpService {
-
+  url: String = 'http://localhost:8080'
    
   constructor(private http: HttpClient) { }
   
   getSongs() {
-    return this.http.get('http://localhost:8080/open/songs')
+    return this.http.get(this.url+'/open/songs')
   }
   getSongsID(id) {
-    return this.http.get('http://localhost:8080/open/songs/'+id)
+    return this.http.get(this.url+'/open/songs/'+id)
   }
   logIn(userData: Object){
-    return this.http.post('http://localhost:8080/login', userData)
+    return this.http.post(this.url+'/login', userData)
   }
   // this wil register a new user 
   register(registerData: Object){
-    return this.http.post('http://localhost:8080/register', registerData);
+    return this.http.post(this.url+'/register', registerData);
+  }
+  addSong(songData: Object){
+    return this.http.post(this.url+'/auth/addsong', songData);
   }
   search(name){
-    return this.http.get('http://localhost:8080/open/songs/search/'+name)
+    return this.http.get(this.url+'/open/songs/search/'+name)
   }
 
   addRating(id: String, ratingData: Object){
     
-    return this.http.post('http://localhost:8080/auth/songs/addrating/'+id, ratingData)
+    return this.http.post(this.url+'/auth/songs/addrating/'+id, ratingData)
   }
   addReview(id: String, ratingData: Object){
-    return this.http.post('http://localhost:8080/auth/songs/addreview/'+id, ratingData)
+    return this.http.post(this.url+'/auth/songs/addreview/'+id, ratingData)
   }
 }

@@ -1,0 +1,18 @@
+<div>
+    <h1>Add New Song:</h1>
+    <p>Title:<br>
+        <input type="text" [(ngModel)]="stitle"></p>
+    <p>Artist:<br>
+        <input type="text" [(ngModel)]="sartist"></p>
+    <p>Album:<br>
+        <input type="text" [(ngModel)]="salbum"></p>
+    <p>Year:<br>
+        <input type="text" [(ngModel)]="syear"></p>
+    <p>Track:<br>
+        <input type="text" [(ngModel)]="strack"></p>
+    <p>Genre:<br>
+        <input type="text" [(ngModel)]="sgenre"></p>
+    <button (click)="submit()">submit</button>
+    <p>{{reply}}</p>
+
+</div>
