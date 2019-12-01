@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NewsongComponent } from './newsong/newsong.component';
+import { NewsongmoreComponent } from './newsongmore/newsongmore.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NewsongComponent } from './newsong/newsong.component';
     RegisterComponent,
     AdminComponent,
     LogoutComponent,
-    NewsongComponent
+    NewsongComponent,
+    NewsongmoreComponent
   ],
   imports: [
     BrowserModule,

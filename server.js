@@ -145,8 +145,8 @@ router.route('/auth/addsong')
         song.stitle = req.body.stitle;
         song.sartist = req.body.sartist;
 
-        if (song.sartist === ""){ return res.send({message: 'Empty artist field'})};
-        if (song.title === ""){ return res.send({message: 'Empty title field'})};
+        if (song.sartist === "" || song.sartist === undefined){ return res.send({message: 'Empty artist field'})};
+        if (song.stitle === "" || song.stitle === undefined){ return res.send({message: 'Empty title field'})};
         song.salbum = req.body.salbum;
         song.syear = req.body.syear;
         song.strack = req.body.sgenre;
@@ -158,7 +158,7 @@ router.route('/auth/addsong')
             if (err) {
                 res.send(err)
             }
-            res.json(song.songname);
+            return res.json({message: 'success'});
         })
        //return res.send(songname);
     });

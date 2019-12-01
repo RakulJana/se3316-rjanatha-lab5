@@ -25,6 +25,9 @@ export class HttpService {
   addSong(songData: Object){
     return this.http.post(this.url+'/auth/addsong', songData);
   }
+  addBoth(songData: Object){
+    return this.http.post(this.url+'/auth/addboth', songData);
+  }
   search(name){
     return this.http.get(this.url+'/open/songs/search/'+name)
   }

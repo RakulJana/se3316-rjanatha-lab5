@@ -4,7 +4,7 @@
     <li>Add a review to a song: </li>
     <li>Add a rating to a song:</li>
     <li>Add a new song: <button (click)= "newSongButton()">Add Now</button></li>
-    <li>Adding a song, review and rating all at once: </li>
+    <li>Adding a song, review and rating all at once: <button (click)= "newSongMoreButton()">Add Both Now</button></li>
 </ol>
 
 <ol *ngIf="songs">
@@ -20,6 +20,7 @@
                 <input type="text" [(ngModel)]="reviewname" placeholder="enter"></p>
             <button (click)="addRatingInfo()">Add Rating</button>
     </div>
+
     <div *ngIf="display">
         <h2>ADD Review FORM FOR SONG: {{title}} </h2>
         <p>Review Description:<br>

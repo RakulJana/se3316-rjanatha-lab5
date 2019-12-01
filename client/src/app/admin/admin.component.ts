@@ -77,5 +77,8 @@ export class AdminComponent implements OnInit {
   newSongButton(){
     this.route.navigateByUrl("newsong");
   }
+  newSongMoreButton(){
+    this.route.navigateByUrl("newsongmore");
+  }
 
 }

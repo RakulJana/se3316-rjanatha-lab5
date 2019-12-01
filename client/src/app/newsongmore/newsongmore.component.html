@@ -1,5 +1,5 @@
 <div>
-    <h1>Add New Song and Review:</h1>
+    <h1>Add New Song:</h1>
     <p>Title:<br>
         <input type="text" [(ngModel)]="stitle"></p>
     <p>Artist:<br>
@@ -12,6 +12,12 @@
         <input type="text" [(ngModel)]="strack"></p>
     <p>Genre:<br>
         <input type="text" [(ngModel)]="sgenre"></p>
+    <p>Rating:<br>
+        <input type="text" [(ngModel)]="rating"></p>
+    <p>Review Description:<br>
+        <input type="text" [(ngModel)]="reviewdes"></p>
+    <p>Review Name:<br>
+        <input type="text" [(ngModel)]="reviewname"></p>
     <button (click)="submit()">submit</button>
     <p>{{reply}}</p>
 
