@@ -1,1 +1,16 @@
-<p>sitemanager works!</p>
+<h1>In this section of the app you will be able to do the following as SM:</h1>
+<ol>
+    <li>Grant SM to a user of your choice</li>
+    <li>Mark a song as hidden</li>
+    <li>Deactivate any user of your choice</li>
+    <li>Reactivate any user of your choice</li>
+</ol>
+
+
+<ol *ngIf="users">
+    <li *ngFor="let user of users">
+        <p class="title">Username: {{ user.name }}</p>
+        <p class="title">Site Manager? {{ user.verified }}</p>
+        <p class="title">Disabled? {{ user.disabled }}<button (click)="change(user._id, user.disabled)"> Change</button></p>
+    </li>
+</ol>

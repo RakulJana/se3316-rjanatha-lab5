@@ -12,6 +12,12 @@ export class HttpService {
   getSongs() {
     return this.http.get(this.url+'/open/songs')
   }
+  getUsers() {
+    return this.http.get(this.url+'/users')
+  }
+  updateDisable(id, newData){
+    return this.http.put(this.url+'/edituserdis/'+id, newData)
+  }
   getSongsID(id) {
     return this.http.get(this.url+'/open/songs/'+id)
   }

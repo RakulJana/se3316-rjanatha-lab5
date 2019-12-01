@@ -217,7 +217,25 @@ router.route('/auth/songs/:song_id') // works great
             res.json({ message: 'Success in deleting' });
         });
     });
+// to edit a specific user 
+router.route('/edituserdis/:user_id')
+    .put(function (req, res) {
+        var disabled = req.body.disabled;
+        User.findById(req.params.user_id, function (err, user) {
+            if (err)
+                res.send(err);
+            //var localReview = { rating: req.body.rating, reviewname: req.body.reviewname }; // this stores a local object of the review added
+            //song.reviews.push(localReview);
+            user.disabled = disabled;
+            // save the song
+            user.save(function (err) {
+                if (err)
+                    res.send(err)
+                res.json({ message: 'User Info Saved' });
+            });
+        });
 
+    });
 
 // ROUTE TO GET USERS
 router.route('/users') 
@@ -232,6 +250,7 @@ router.route('/users')
         });
 
     });
+
 // ROUTE WILL BE USED TO CREATE A NEW USER
 router.route('/register')
     .post(async function (req, res) {
