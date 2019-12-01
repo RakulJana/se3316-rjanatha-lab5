@@ -25,8 +25,8 @@ var Song = require('./app/models/songs') // we are calling the user model from t
 var sender = nodeMailer.createTransport({
     service: "Gmail",
     auth: {
-        username: "thetestingman9@gmail.com",
-        password: 'thetestingman123'
+        username: "thetestman9@gmail.com",
+        password: 'thetestman123'
     }
 });
 
@@ -275,18 +275,15 @@ router.route('/register')
                     if (err) {
                         res.send(err)
                     }
+                    sendConfirm(user.name);
                     res.json(user.pass);
                 })
 
                 
             }
         })
-        // must create user, hash password and save it
-        // in the body i will be passing a username and password to the variable
-        // DEFINE THE NEW USER
-       
-       
-            //sendConfirm(name); //  having a problem with this function
+
+         //  having a problem with this function
             
        /* User.find({name: name}, function(err, users){
             console.log(users.name);
@@ -312,18 +309,19 @@ router.route('/register')
 
 
 //THIS FUNCTION WORKS, BUT HAVING AN ISSUE WITH WITH PASSING THE
-/*function sendConfirm(host, clientName){
-    var host = '/localhost:8080';
-    var verificationL = "https://"+host+"/verify"+verificationC;
-    console.log(verificationL);
+function sendConfirm(clientName){
+    console.log(clientName)
+    //var host = 'localhost:8080';
+    /*var verificationL = "https://"+host+"/verify"+verificationC;
+    console.log(verificationL);*/
     var template = {
         to: clientName,
         subject: "Verify Email Please",
-        html: verificationL
+        html: "hello",
     }
     sender.sendMail(template);
     return true;
-}*/
+}
 
 // Route to see if user already exists
 router.route('/login')
