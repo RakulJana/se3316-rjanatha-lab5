@@ -63,8 +63,20 @@ export class LoginComponent implements OnInit {
         // since not yet verified we will leave it as registered
         this.reply = newData["message"] + " please try again";
       }
+      //Site Manager User
+      // if user is already verified, then the site manager priviledge will come up 
+      if(newData["message"] == "Site Manager User"){
+        localStorage.username = this.name;
+        localStorage.manager = this.pass; // if pass word exists, this is a site manager
+        console.log(name);
+
+        this.route.navigateByUrl("")
+      }
+
+
       if(newData["message"] == "Logged In"){
         // i set a local storage of the username within the browser, to be able to access authorized urls
+        
         localStorage.username = this.name;
         console.log(name);
 

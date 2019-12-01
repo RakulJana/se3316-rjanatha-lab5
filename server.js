@@ -261,6 +261,10 @@ router.route('/register')
         user.verificationC = verificationC;
         user.verified = false;
         user.disabled = false;
+        /**
+         * 
+         * 
+         */
         
         User.findOne({name: name}, function (err, users){
             if(err){
@@ -342,36 +346,21 @@ router.route('/login')
         if (users === null){
             return res.send({message: "Does not exist"})
         }
-        if (users.disabled === true){
-            return res.send({message: "Disabled user"})
-        }
-        
-        //res.json(users);
-        //console.log(users)
         // checks to see if the password made was correct
         var check = bcrypt.compareSync(pass, users.pass)
         if (check){
+            if (users.verified === true){
+                return res.send({message: "Site Manager User"}) // in the front end based on this message, it will complete certain actions
+            }
+            if (users.disabled === true){
+                return res.send({message: "Disabled user"})
+            }
             return res.send({message: "Logged In"})
-            console.log('true');
-            var verified = users.verified;
-            var disabled = users.disabled;
-            var admin = users.admin;
-            res.status(400).send();
+            
         }
         else{
             return res.send({message: "Wrong Password"})
         }
-        // =====================================================
-        // in this portion i must do the checks to accordingly route them
-        //=====================================================
-        /*if (!verified){
-            return res.send({message:"you are good", id: users._id})
-        }
-            else if(!verified)
-                return res.send({message:"you are  good", id: users._id})
-        if(disabled){
-            return res.send({mesage:"disabled", id: users._id})
-        }*/
 
     });
 

@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/admin.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NewsongComponent } from './newsong/newsong.component';
 import { NewsongmoreComponent } from './newsongmore/newsongmore.component';
+import { SitemanagerComponent } from './sitemanager/sitemanager.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NewsongmoreComponent } from './newsongmore/newsongmore.component';
     AdminComponent,
     LogoutComponent,
     NewsongComponent,
-    NewsongmoreComponent
+    NewsongmoreComponent,
+    SitemanagerComponent
   ],
   imports: [
     BrowserModule,

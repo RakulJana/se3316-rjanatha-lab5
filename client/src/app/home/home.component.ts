@@ -20,15 +20,24 @@ export class HomeComponent implements OnInit {
   reviews: [];
   display: Boolean = false;
   value: Boolean = false;
+  sm: Boolean = false;
 
   constructor(private _http: HttpService, private route: Router) { }
 
   ngOnInit() {
-    if(localStorage.username == null){
-      this.value = false;
-    }else{
+    if(localStorage.username != null && localStorage.manager != null){
+      this.sm = true;
       this.value = true;
     }
+    if(localStorage.username == null){
+      this.value = false;
+      //this.sm = true;
+      
+    }else if (localStorage.username != null){
+      this.value = true;
+      //this.sm = true;
+    }
+    
     
     
     this._http.getSongs().subscribe(data => {
@@ -91,7 +100,11 @@ loggedIn(){
 }
 
 reroute(){
+  
   this.route.navigateByUrl("admin")
+}
+smRoute(){
+  this.route.navigateByUrl("sitemanager")
 }
 
 

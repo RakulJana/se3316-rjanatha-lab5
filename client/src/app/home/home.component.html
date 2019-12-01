@@ -1,7 +1,7 @@
 <h1>Home</h1>
 <h2>This app is used to get the song information in our database. If you wish to register or log in please click the buttons on the header. Enjoy</h2>
 
-<h1>Song Info</h1>
+<h1>Search</h1>
 <input type = "text" [(ngModel)] = "name" placeholder="Enter Search">
 <button (click) = "searchRes(name)">Search</button>
 
@@ -52,5 +52,11 @@
     <h1>You Are Logged In User. Welcome to the Admin Life!!!</h1>
     <p>If you want to go to your admin priviledges, please click the following button</p>
     <button (click) = reroute()>admin</button>
+</div>
+
+<div *ngIf="sm">
+    <h1>You Are Logged In as a SM also. Welcome to the SM Life!!!</h1>
+    <p>If you want to go to your SM priviledges, please click the following button</p>
+    <button (click)=smRoute()>SM</button>
 </div>
  

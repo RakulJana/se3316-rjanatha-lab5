@@ -7,6 +7,7 @@ import { AdminComponent } from './admin/admin.component'
 import { LogoutComponent } from './logout/logout.component'
 import { NewsongComponent } from './newsong/newsong.component'
 import { NewsongmoreComponent } from './newsongmore/newsongmore.component'
+import { SitemanagerComponent } from './sitemanager/sitemanager.component'
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent},
   { path: 'logout', component: LogoutComponent},
   { path: 'newsong', component: NewsongComponent },
-  { path: 'newsongmore', component: NewsongmoreComponent}
+  { path: 'newsongmore', component: NewsongmoreComponent},
+  { path: 'sitemanager', component: SitemanagerComponent}
 ];
 
 @NgModule({
