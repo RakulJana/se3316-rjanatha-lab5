@@ -260,7 +260,7 @@ router.route('/register')
         user.pass = hashPass; // we want to end up hashing the passswords, so no one will know
         user.verificationC = verificationC;
         user.verified = false;
-        user.disabled = true;
+        user.disabled = false;
         
         User.findOne({name: name}, function (err, users){
             if(err){
@@ -341,6 +341,9 @@ router.route('/login')
         }
         if (users === null){
             return res.send({message: "Does not exist"})
+        }
+        if (users.disabled === true){
+            return res.send({message: "Disabled user"})
         }
         
         //res.json(users);

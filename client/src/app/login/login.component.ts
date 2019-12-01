@@ -40,6 +40,12 @@ export class LoginComponent implements OnInit {
     // this passes in log in inofrmation
     this._http.logIn(userData).subscribe(data => {
       var newData = data;
+      // checks to see if disabled, added an alert
+      if(newData["message"] == "Disabled user"){
+        console.log(newData["message"])
+        this.reply = "You are a disabled user, please contact the SM, INSERT EMAIL HERE, to re-enabled"
+        //this.reply = newData["message"] + " please try again";
+      }
       // the the data is the same as res.json. it checks
       if(newData["message"] == "Invalid email field"){
         console.log(newData["message"])
