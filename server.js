@@ -248,13 +248,19 @@ router.route('/register')
         
         // this sets up our hash password
         try{
-            var salt = await bcrypt.genSalt()
-            var hashPass = await bcrypt.hash(pass, salt); // will take the password we send and the associated salt made
+            var salt =await bcrypt.genSalt()
+            var hashPass =await bcrypt.hash(pass, salt); // will take the password we send and the associated salt made
             // the new has pass we made, will be used to store in the db
             // the hashPass already has the associated salt
         }catch{
             res.status(500).send();
         }
+        user = new User();
+        user.name = req.body.name; // this will use the req body name for the post requiest and use the user model to add it in the collection we made
+        user.pass = hashPass; // we want to end up hashing the passswords, so no one will know
+        user.verificationC = verificationC;
+        user.verified = false;
+        user.disabled = true;
         
         User.findOne({name: name}, function (err, users){
             if(err){
@@ -263,23 +269,7 @@ router.route('/register')
             if(users!== null){
                 return res.send({message:"already exists"})
             }
-        })
-        // must create user, hash password and save it
-        // in the body i will be passing a username and password to the variable
-        // DEFINE THE NEW USER
-        user = new User();
-        user.name = req.body.name; // this will use the req body name for the post requiest and use the user model to add it in the collection we made
-        user.pass = hashPass; // we want to end up hashing the passswords, so no one will know
-        user.verificationC = verificationC;
-        user.verified = false;
-        user.disabled = true;
-        User.findOne({name: name}, function (err, users) {  // looks for all users in users
-            console.log(users)
-            console.log(name);
-            if(err){
-                return res.send({mesage: "NO GO"})
-            }
-            if (users === null){
+            else {
                 
                 user.save(function (err) {
                     if (err) {
@@ -288,8 +278,14 @@ router.route('/register')
                     res.json(user.pass);
                 })
 
-                return res.send({message: "not an old user, so lets get signed up"})
+                
             }
+        })
+        // must create user, hash password and save it
+        // in the body i will be passing a username and password to the variable
+        // DEFINE THE NEW USER
+       
+       
             //sendConfirm(name); //  having a problem with this function
             
        /* User.find({name: name}, function(err, users){
@@ -311,8 +307,7 @@ router.route('/register')
             }
         })*/
         
-// WILL DO VERIFICATION FOR THE USER AFTER
-    });
+// WI
 });
 
 
@@ -339,7 +334,7 @@ router.route('/login')
     var pass = req.body.pass;
     //console.log(passw);
     if (name === ""){ return res.send({message: 'Empty email field'})};
-    //if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
+    if (!validator.isEmail(name)){ return res.send({message: 'Invalid email field'})};;
     if (pass === ""){ return res.send({message: 'Empty password field'})};
     
     User.findOne({name: name}, function (err, users) {  // looks for all users in users

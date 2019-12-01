@@ -15,11 +15,14 @@ export class HttpService {
   getSongsID(id) {
     return this.http.get('http://localhost:8080/open/songs/'+id)
   }
-  logIn(userData){
+  logIn(userData: Object){
     return this.http.post('http://localhost:8080/login', userData)
+  }
+  // this wil register a new user 
+  register(registerData: Object){
+    return this.http.post('http://localhost:8080/register', registerData);
   }
   search(name){
     return this.http.get('http://localhost:8080/open/songs/search/'+name)
-    
   }
 }

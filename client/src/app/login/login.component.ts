@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   disp: boolean = false;
   name: string=''; // values from the html
   pass: string = '';
+  reply: string = '';
   //userData: Object;
   
   
@@ -37,6 +38,18 @@ export class LoginComponent implements OnInit {
     this._http.logIn(userData).subscribe(data => {
       var newData = data;
       // the the data is the same as res.json. it checks
+      if(newData["message"] == "Invalid email field"){
+        console.log(newData["message"])
+        this.reply = newData["message"] + " please try again";
+      }
+      if(newData["message"] == "Empty email field"){
+        console.log(newData["message"])
+        this.reply = newData["message"] + " please try again";
+      }
+      if(newData["message"] == "Empty password field"){
+        // since not yet verified we will leave it as registered
+        this.reply = newData["message"] + " please try again";
+      }
       if(newData["message"] == "Logged In"){
         // i set a local storage of the username within the browser, to be able to access authorized urls
         localStorage.username = this.name;
@@ -44,9 +57,7 @@ export class LoginComponent implements OnInit {
 
         this.route.navigateByUrl("")
       }
-      else{
-        console.log("You are not in")
-      }
+      
 
   });
 }
