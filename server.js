@@ -217,7 +217,7 @@ router.route('/auth/songs/:song_id') // works great
             res.json({ message: 'Success in deleting' });
         });
     });
-// to edit a specific user 
+// to edit a specific user to becoming disabled or enabled 
 router.route('/edituserdis/:user_id')
     .put(function (req, res) {
         var disabled = req.body.disabled;
@@ -227,6 +227,25 @@ router.route('/edituserdis/:user_id')
             //var localReview = { rating: req.body.rating, reviewname: req.body.reviewname }; // this stores a local object of the review added
             //song.reviews.push(localReview);
             user.disabled = disabled;
+            // save the song
+            user.save(function (err) {
+                if (err)
+                    res.send(err)
+                res.json({ message: 'User Info Saved' });
+            });
+        });
+
+    });
+    // edit a specific user to become SM
+    router.route('/editusersm/:user_id')
+    .put(function (req, res) {
+        var verified = req.body.verified;
+        User.findById(req.params.user_id, function (err, user) {
+            if (err)
+                res.send(err);
+            //var localReview = { rating: req.body.rating, reviewname: req.body.reviewname }; // this stores a local object of the review added
+            //song.reviews.push(localReview);
+            user.verified = verified;
             // save the song
             user.save(function (err) {
                 if (err)

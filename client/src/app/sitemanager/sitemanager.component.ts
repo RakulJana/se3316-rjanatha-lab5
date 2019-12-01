@@ -13,6 +13,7 @@ export class SitemanagerComponent implements OnInit {
   users: Object;
   id: String = "";
   dis: Boolean;
+  ver: Boolean;
 
 
   ngOnInit() {
@@ -30,10 +31,10 @@ export class SitemanagerComponent implements OnInit {
     }
 
   }
-
-  change(id, dis){
+// changes to disability and verification only occur after log in and log out repeated
+  changeDis(id, dis){
     this.id = id;
-    this.dis = !dis;
+    this.dis = !dis; // toggles from whatever the component was initialized to before 
     let disType = {
       disabled: this.dis
     }
@@ -47,9 +48,24 @@ export class SitemanagerComponent implements OnInit {
     }
     
     );
+  }
 
-
-
+  changeVer(id, ver){
+    this.id = id;
+    this.ver = !ver;
+    let verType = {
+      verified: this.ver
+    }
+    console.log(this.dis);
+    this._http.updateVerify(this.id, verType).subscribe(data => {
+      //return this.dis;
+      //this.search = data;
+      //console.log(this.search)
+      //this.display = false;
+      window.location.reload();
+    }
+    
+    );
   }
 
 }

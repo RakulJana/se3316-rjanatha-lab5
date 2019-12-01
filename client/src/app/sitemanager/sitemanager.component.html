@@ -10,7 +10,7 @@
 <ol *ngIf="users">
     <li *ngFor="let user of users">
         <p class="title">Username: {{ user.name }}</p>
-        <p class="title">Site Manager? {{ user.verified }}</p>
-        <p class="title">Disabled? {{ user.disabled }}<button (click)="change(user._id, user.disabled)"> Change</button></p>
+        <p class="title">Site Manager? {{ user.verified }}<button (click)="changeVer(user._id, user.verified)"> Change Verification</button></p>
+        <p class="title">Disabled? {{ user.disabled }}<button (click)="changeDis(user._id, user.disabled)"> Change Disability</button></p>
     </li>
 </ol>

@@ -18,6 +18,9 @@ export class HttpService {
   updateDisable(id, newData){
     return this.http.put(this.url+'/edituserdis/'+id, newData)
   }
+  updateVerify(id, newData){
+    return this.http.put(this.url+'/editusersm/'+id, newData)
+  }
   getSongsID(id) {
     return this.http.get(this.url+'/open/songs/'+id)
   }
