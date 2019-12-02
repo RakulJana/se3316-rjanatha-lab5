@@ -13,3 +13,8 @@ add a priviledged user called site manager
 - if site manager is detected, should be given a specific link to another portal
 - which gives them options to grant someone else as site manager, 
 - add a thing saying you are a site manager- mark a user as deactivated and unmark user as deactivated 
+Take Down Procedure:
+https://developer.moneris.com/en/More/Compliance/Sample%20Privacy%20Policy
+
+DMCA Notice Example:
+https://support.google.com/youtube/answer/2807622?hl=en

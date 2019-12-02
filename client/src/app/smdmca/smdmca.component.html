@@ -1,13 +1,13 @@
 <h1>All Policies: Click on edit to edit them </h1>
 <ul *ngIf="dmca">
     <li *ngFor="let pol of dmca">
-        <p>First Policy:</p>
+        <p>Security & Privacy</p>
         <p>{{pol.policyOne}}</p>
         <br>
-        <p>Policy Two</p>
+        <p>DMCA Notice & Take down</p>
         <p>{{pol.policyTwo}}</p>
         <br>
-        <p>Policy Three</p>
+        <p>DMCA Take Down Procedure</p>
         <p>{{pol.policyThree}}</p>
         <button (click)="edit(pol._id)">Edit Policy</button>
     </li>
