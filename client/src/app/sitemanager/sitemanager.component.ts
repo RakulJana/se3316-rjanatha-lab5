@@ -31,6 +31,10 @@ export class SitemanagerComponent implements OnInit {
     }
 
   }
+
+  policy(){
+    this.route.navigateByUrl('smdmca')
+  }
 // changes to disability and verification only occur after log in and log out repeated
   changeDis(id, dis){
     this.id = id;

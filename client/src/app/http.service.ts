@@ -21,6 +21,9 @@ export class HttpService {
   postDmca(data){
     return this.http.post(this.url+'/DMCA', data)
   }
+  updatePol(id, data){
+    return this.http.put(this.url+'/DMCA/'+id, data)
+  }
   updateDisable(id, newData){
     return this.http.put(this.url+'/edituserdis/'+id, newData)
   }

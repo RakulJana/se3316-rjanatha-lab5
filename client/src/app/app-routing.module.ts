@@ -9,6 +9,7 @@ import { NewsongComponent } from './newsong/newsong.component'
 import { NewsongmoreComponent } from './newsongmore/newsongmore.component'
 import { SitemanagerComponent } from './sitemanager/sitemanager.component'
 import { ViewdmcaComponent } from './viewdmca/viewdmca.component';
+import { SmdmcaComponent } from './smdmca/smdmca.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'newsong', component: NewsongComponent },
   { path: 'newsongmore', component: NewsongmoreComponent},
   { path: 'sitemanager', component: SitemanagerComponent},
-  { path: 'viewdmca', component: ViewdmcaComponent}
+  { path: 'viewdmca', component: ViewdmcaComponent},
+  { path: 'smdmca', component: SmdmcaComponent}
 ];
 
 @NgModule({

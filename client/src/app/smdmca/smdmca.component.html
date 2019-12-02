@@ -1,1 +1,35 @@
-<p>smdmca works!</p>
+<h1>All Policies: Click on edit to edit them </h1>
+<ul *ngIf="dmca">
+    <li *ngFor="let pol of dmca">
+        <p>First Policy:</p>
+        <p>{{pol.policyOne}}</p>
+        <br>
+        <p>Policy Two</p>
+        <p>{{pol.policyTwo}}</p>
+        <br>
+        <p>Policy Three</p>
+        <p>{{pol.policyThree}}</p>
+        <button (click)="edit(pol._id)">Edit Policy</button>
+    </li>
+
+    <div *ngIf = (display)>
+        <p>Security & Privacy</p>
+        <textarea [(ngModel)] = "polOne"></textarea>
+        <p>DMCA Notice & Take down</p>
+        <textarea [(ngModel)] = "polTwo"></textarea>
+        <p>DMCA Take Down Procedure</p>
+        <textarea [(ngModel)] = "polThree"></textarea>
+        <button (click)="postChanges()">Submit Changes</button>
+    </div>
+</ul>
+
+<button (click) = "addNew()">Create a new policy</button>
+<div *ngIf = (obs)>
+        <p>Security & Privacy</p>
+        <textarea [(ngModel)] = "polOne"></textarea>
+        <p>DMCA Notice & Take down</p>
+        <textarea [(ngModel)] = "polTwo"></textarea>
+        <p>DMCA Take Down Procedure</p>
+        <textarea [(ngModel)] = "polThree"></textarea>
+        <button (click)="newPolicy()">Submit Changes</button>
+</div>
