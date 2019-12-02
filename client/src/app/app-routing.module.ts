@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component'
 import { NewsongComponent } from './newsong/newsong.component'
 import { NewsongmoreComponent } from './newsongmore/newsongmore.component'
 import { SitemanagerComponent } from './sitemanager/sitemanager.component'
+import { ViewdmcaComponent } from './viewdmca/viewdmca.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent},
   { path: 'newsong', component: NewsongComponent },
   { path: 'newsongmore', component: NewsongmoreComponent},
-  { path: 'sitemanager', component: SitemanagerComponent}
+  { path: 'sitemanager', component: SitemanagerComponent},
+  { path: 'viewdmca', component: ViewdmcaComponent}
 ];
 
 @NgModule({

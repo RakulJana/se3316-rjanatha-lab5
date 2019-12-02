@@ -1,0 +1,14 @@
+<h1>OUR POLICIES</h1>
+
+<ul *ngIf="dmca">
+    <li *ngFor="let pol of dmca">
+        <p>First Policy:</p>
+        <p>{{pol.policyOne}}</p>
+        <br>
+        <p>Policy Two</p>
+        <p>{{pol.policyTwo}}</p>
+        <br>
+        <p>Policy Three</p>
+        <p>{{pol.policyThree}}</p>
+    </li>
+</ul>

@@ -12,6 +12,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { NewsongComponent } from './newsong/newsong.component';
 import { NewsongmoreComponent } from './newsongmore/newsongmore.component';
 import { SitemanagerComponent } from './sitemanager/sitemanager.component';
+import { ViewdmcaComponent } from './viewdmca/viewdmca.component';
+import { SmdmcaComponent } from './smdmca/smdmca.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SitemanagerComponent } from './sitemanager/sitemanager.component';
     LogoutComponent,
     NewsongComponent,
     NewsongmoreComponent,
-    SitemanagerComponent
+    SitemanagerComponent,
+    ViewdmcaComponent,
+    SmdmcaComponent
   ],
   imports: [
     BrowserModule,

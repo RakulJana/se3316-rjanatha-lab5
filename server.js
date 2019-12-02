@@ -332,24 +332,7 @@ router.route('/register')
 
          //  having a problem with this function
             
-       /* User.find({name: name}, function(err, users){
-            console.log(users.name);
-            if(err){
-                console.log(err)
-            }
-            if (users == null){
-                
-                user.save(function (err) {
-                    if (err) {
-                        res.send(err)
-                    }
-                    res.json(user.pass);
-                })
-            }
-            else {
-                return res.send({message: "This user already exists"})
-            }
-        })*/
+      
         
 // WI
 });

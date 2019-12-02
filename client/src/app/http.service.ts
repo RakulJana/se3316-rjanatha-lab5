@@ -15,6 +15,12 @@ export class HttpService {
   getUsers() {
     return this.http.get(this.url+'/users')
   }
+  getDmca(){
+    return this.http.get(this.url+'/DMCA')
+  }
+  postDmca(data){
+    return this.http.post(this.url+'/DMCA', data)
+  }
   updateDisable(id, newData){
     return this.http.put(this.url+'/edituserdis/'+id, newData)
   }
